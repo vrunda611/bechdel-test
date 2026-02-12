@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bechdel Test Checker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <!-- Hero / Search Section -->
+    <section class="hero">
+      <h1 class="hero-question">
+        Does
+        <span class="input-wrapper">
+          <input
+            type="text"
+            id="movie-input"
+            placeholder="enter a movie"
+            autocomplete="off"
+            spellcheck="false"
+          >
+        </span>
+        pass the Bechdel Test?
+      </h1>
+      <button id="find-out-btn" class="btn" type="button">Find Out</button>
+    </section>
+
+    <!-- Loading State -->
+    <section id="loading" class="loading hidden" aria-live="polite">
+      <p class="loading-text">Consulting the council of cinema<span class="dots"></span></p>
+    </section>
+
+    <!-- Error State -->
+    <section id="error" class="error-card hidden" aria-live="polite">
+      <p id="error-message"></p>
+    </section>
+
+    <!-- Result Card -->
+    <section id="result" class="result-card hidden" aria-live="polite">
+      <div class="result-header">
+        <h2 id="result-title" class="result-title"></h2>
+        <span id="result-badge" class="badge"></span>
+      </div>
+
+      <div class="score-breakdown">
+        <div class="score-step" data-level="1">
+          <span class="step-indicator"></span>
+          <span class="step-label">Two named women</span>
+        </div>
+        <div class="score-step" data-level="2">
+          <span class="step-indicator"></span>
+          <span class="step-label">They talk to each other</span>
+        </div>
+        <div class="score-step" data-level="3">
+          <span class="step-indicator"></span>
+          <span class="step-label">About something other than a man</span>
+        </div>
+      </div>
+
+      <p id="result-explanation" class="result-explanation"></p>
+
+      <a id="result-link" class="result-link" href="#" target="_blank" rel="noopener noreferrer">
+        View on BechdelTest.com &rarr;
+      </a>
+
+      <button id="try-another-btn" class="btn btn-secondary" type="button">Try another movie</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>
+      Data from <a href="https://bechdeltest.com" target="_blank" rel="noopener noreferrer">bechdeltest.com</a>.
+      The Bechdel Test was popularized by Alison Bechdel.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+/* ===========================
+   Bechdel Test Checker — Styles
+   =========================== */
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 18px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  background: #0d0d0d;
+  color: #e8e8e8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.5;
+}
+
+/* --- Layout --- */
+.container {
+  width: 100%;
+  max-width: 720px;
+  padding: 2rem 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Hero / Question --- */
+.hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hero-question {
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: #f5f5f5;
+}
+
+/* Inline input styled as fill-in-the-blank */
+.input-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+#movie-input {
+  font-family: inherit;
+  font-size: 2.6rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #f0c040;
+  background: none;
+  border: none;
+  border-bottom: 3px solid #f0c040;
+  outline: none;
+  text-align: center;
+  width: 8ch;
+  min-width: 6ch;
+  padding: 0 0.1em;
+  transition: border-color 0.2s;
+}
+
+#movie-input::placeholder {
+  color: #665a30;
+  font-style: italic;
+}
+
+#movie-input:focus {
+  border-bottom-color: #ffd95a;
+}
+
+/* --- Button --- */
+.btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #0d0d0d;
+  background: #f0c040;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.btn:hover {
+  background: #ffd95a;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #999;
+  border: 1px solid #333;
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  padding: 0.55rem 1.5rem;
+}
+
+.btn-secondary:hover {
+  color: #e8e8e8;
+  border-color: #666;
+  background: transparent;
+}
+
+/* --- Hidden utility --- */
+.hidden {
+  display: none !important;
+}
+
+/* --- Loading --- */
+.loading {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.loading-text {
+  font-size: 1.15rem;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Animated ellipsis */
+.dots::after {
+  content: "";
+  animation: ellipsis 1.4s steps(4, end) infinite;
+}
+
+@keyframes ellipsis {
+  0%  { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
+}
+
+/* --- Error Card --- */
+.error-card {
+  text-align: center;
+  padding: 1.5rem 2rem;
+  background: rgba(255, 70, 90, 0.08);
+  border: 1px solid rgba(255, 70, 90, 0.25);
+  border-radius: 16px;
+  max-width: 520px;
+  width: 100%;
+}
+
+.error-card p {
+  color: #ff6b7a;
+  font-size: 1.05rem;
+}
+
+/* --- Result Card --- */
+.result-card {
+  background: #161616;
+  border: 1px solid #262626;
+  border-radius: 20px;
+  padding: 2rem 2.2rem;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Fade-in animation */
+.result-card.fade-in {
+  animation: fadeSlideUp 0.45s ease-out both;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.result-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #f5f5f5;
+}
+
+/* PASS / FAIL badge */
+.badge {
+  display: inline-block;
+  padding: 0.35rem 1.4rem;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.badge-pass {
+  background: rgba(72, 220, 130, 0.15);
+  color: #48dc82;
+  border: 2px solid rgba(72, 220, 130, 0.35);
+}
+
+.badge-fail {
+  background: rgba(255, 70, 110, 0.12);
+  color: #ff466e;
+  border: 2px solid rgba(255, 70, 110, 0.3);
+}
+
+/* --- Score Breakdown (step indicator) --- */
+.score-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.4rem;
+  text-align: left;
+}
+
+.score-step {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.95rem;
+  color: #666;
+  transition: color 0.3s;
+}
+
+.score-step.met {
+  color: #ccc;
+}
+
+/* Circle indicator */
+.step-indicator {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #333;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.score-step.met .step-indicator {
+  border-color: #48dc82;
+  background: rgba(72, 220, 130, 0.2);
+}
+
+/* Checkmark inside met indicator */
+.score-step.met .step-indicator::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  color: #48dc82;
+  font-weight: 700;
+}
+
+.score-step.not-met .step-indicator {
+  border-color: #444;
+}
+
+.score-step.not-met .step-indicator::after {
+  content: "✗";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  color: #555;
+  font-weight: 700;
+}
+
+/* --- Result explanation --- */
+.result-explanation {
+  font-size: 0.95rem;
+  color: #888;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+/* --- Result link --- */
+.result-link {
+  display: inline-block;
+  color: #f0c040;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.3rem 0;
+  transition: color 0.2s;
+}
+
+.result-link:hover {
+  color: #ffd95a;
+  text-decoration: underline;
+}
+
+/* --- Footer --- */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: #555;
+  font-size: 0.8rem;
+}
+
+.footer a {
+  color: #888;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #ccc;
+  text-decoration: underline;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  html {
+    font-size: 16px;
+  }
+
+  .hero-question {
+    font-size: 1.8rem;
+  }
+
+  #movie-input {
+    font-size: 1.8rem;
+  }
+
+  .result-card {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .container {
+    padding: 1.5rem 1rem;
+  }
+}
