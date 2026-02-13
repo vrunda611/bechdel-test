@@ -14,19 +14,10 @@ const loadingEl = document.getElementById("loading");
 const errorEl = document.getElementById("error");
 const errorMsg = document.getElementById("error-message");
 const resultEl = document.getElementById("result");
-const resultTitle = document.getElementById("result-title");
 const resultBadge = document.getElementById("result-badge");
-const resultExplanation = document.getElementById("result-explanation");
+const resultBody = document.getElementById("result-body");
 const resultLink = document.getElementById("result-link");
 const tryAnotherBtn = document.getElementById("try-another-btn");
-
-// Score explanations (indexed by rating 0–3)
-const explanations = [
-  "This film has fewer than two named women characters.",
-  "This film has named women, but they never talk to each other.",
-  "Named women talk to each other — but only about a man.",
-  "Named women talk to each other about something other than a man!",
-];
 
 // ---- Data Fetching ----
 
@@ -104,29 +95,15 @@ function showResult(movie) {
   errorEl.classList.add("hidden");
   resultEl.classList.remove("hidden");
 
-  // Title + year
-  resultTitle.textContent = `${movie.title} (${movie.year})`;
-
-  // PASS / FAIL badge
+  // Yes! / No. badge
   const passes = movie.rating === 3;
-  resultBadge.textContent = passes ? "PASS" : "FAIL";
+  resultBadge.textContent = passes ? "Yes!" : "No.";
   resultBadge.className = "badge " + (passes ? "badge-pass" : "badge-fail");
 
-  // Score breakdown steps
-  const steps = resultEl.querySelectorAll(".score-step");
-  steps.forEach((step) => {
-    const level = parseInt(step.dataset.level, 10);
-    if (movie.rating >= level) {
-      step.classList.add("met");
-      step.classList.remove("not-met");
-    } else {
-      step.classList.remove("met");
-      step.classList.add("not-met");
-    }
-  });
-
-  // Explanation text
-  resultExplanation.textContent = explanations[movie.rating] || "";
+  // Subtitle text
+  resultBody.textContent = passes
+    ? "women spoke to each other about something other than a man.\ncinema lives another day."
+    : "women didn't get to speak to each other about something other than a man.\nbetter luck next time.";
 
   // BechdelTest.com link
   resultLink.href = `https://bechdeltest.com/view/${movie.imdbId}/`;
