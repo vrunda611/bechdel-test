@@ -2,8 +2,7 @@
 // Bechdel Test Checker — Logic
 // ===========================
 
-const CSV_URL =
-  "https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-03-09/raw_bechdel.csv";
+const DATA_URL = "movies.json";
 
 // Cached dataset (populated after first fetch)
 let movieData = null;
@@ -29,81 +28,17 @@ const explanations = [
   "Named women talk to each other about something other than a man!",
 ];
 
-// ---- CSV Parsing ----
-
-function parseCSV(text) {
-  const lines = text.split("\n");
-  // Skip header row
-  const movies = [];
-
-  for (let i = 1; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (!line) continue;
-
-    const fields = parseCSVLine(line);
-    if (fields.length < 5) continue;
-
-    movies.push({
-      year: parseInt(fields[0], 10),
-      id: fields[1],
-      imdbId: fields[2],
-      title: fields[3],
-      rating: parseInt(fields[4], 10),
-    });
-  }
-
-  return movies;
-}
-
-// Handle quoted fields (titles with commas)
-function parseCSVLine(line) {
-  const fields = [];
-  let current = "";
-  let inQuotes = false;
-
-  for (let i = 0; i < line.length; i++) {
-    const ch = line[i];
-
-    if (inQuotes) {
-      if (ch === '"') {
-        // Check for escaped quote ("")
-        if (i + 1 < line.length && line[i + 1] === '"') {
-          current += '"';
-          i++; // skip next quote
-        } else {
-          inQuotes = false;
-        }
-      } else {
-        current += ch;
-      }
-    } else {
-      if (ch === '"') {
-        inQuotes = true;
-      } else if (ch === ",") {
-        fields.push(current);
-        current = "";
-      } else {
-        current += ch;
-      }
-    }
-  }
-
-  fields.push(current); // last field
-  return fields;
-}
-
 // ---- Data Fetching ----
 
 async function fetchData() {
   if (movieData) return movieData;
 
-  const response = await fetch(CSV_URL);
+  const response = await fetch(DATA_URL);
   if (!response.ok) {
-    throw new Error("Failed to fetch movie data. Please check your internet connection.");
+    throw new Error("Failed to load movie data.");
   }
 
-  const text = await response.text();
-  movieData = parseCSV(text);
+  movieData = await response.json();
   return movieData;
 }
 
@@ -235,7 +170,7 @@ async function handleSearch() {
 
     if (!movie) {
       showError(
-        `Couldn\u2019t find \u201c${query}\u201d in our database. Try the full title \u2014 we have ~9,000 movies from 1874\u20132020.`
+        `Couldn\u2019t find \u201c${query}\u201d in our database. Try the full title \u2014 we have ~10,700 movies from 1874\u20132026.`
       );
       return;
     }
