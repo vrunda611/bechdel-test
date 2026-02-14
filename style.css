@@ -136,6 +136,7 @@ body {
   padding: 0;
   transition: border-color 0.2s;
   cursor: text;
+  position: relative;
 }
 
 #movie-input:empty::before {
@@ -146,6 +147,25 @@ body {
 
 #movie-input:focus {
   border-bottom-color: #3570C0;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@media (min-width: 601px) {
+  #movie-input:empty:focus::after {
+    content: "";
+    border-left: 2px solid #2058A4;
+    animation: blink 1s step-end infinite;
+    height: 1em;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+  }
 }
 
 /* --- Button --- */
@@ -208,8 +228,6 @@ body {
 .error-card {
   text-align: center;
   padding: 1.5rem 2rem;
-  background: rgba(180, 40, 55, 0.07);
-  border: 1px solid rgba(180, 40, 55, 0.30);
   border-radius: 16px;
   max-width: 520px;
   width: 100%;
