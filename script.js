@@ -17,6 +17,7 @@ const resultEl = document.getElementById("result");
 const resultBadge = document.getElementById("result-badge");
 const resultBody = document.getElementById("result-body");
 const resultLink = document.getElementById("result-link");
+const didYouMeanEl = document.getElementById("did-you-mean");
 
 // ---- Descriptor texts (cycled sequentially) ----
 
@@ -108,6 +109,52 @@ function searchMovie(query, data) {
   return null;
 }
 
+// ---- Fuzzy Matching ----
+
+function levenshteinDistance(a, b) {
+  a = a.toLowerCase();
+  b = b.toLowerCase();
+  const m = a.length;
+  const n = b.length;
+  const dp = Array.from({ length: m + 1 }, () => new Array(n + 1));
+
+  for (let i = 0; i <= m; i++) dp[i][0] = i;
+  for (let j = 0; j <= n; j++) dp[0][j] = j;
+
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      if (a[i - 1] === b[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1];
+      } else {
+        dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+      }
+    }
+  }
+
+  return dp[m][n];
+}
+
+function fuzzySearch(query, data) {
+  const normalized = query.trim().toLowerCase();
+  if (!normalized) return null;
+
+  const threshold = Math.max(3, Math.floor(normalized.length * 0.4));
+  let bestMatch = null;
+  let bestDistance = Infinity;
+
+  for (const movie of data) {
+    const title = movie.title.toLowerCase();
+    const dist = levenshteinDistance(normalized, title);
+
+    if (dist < bestDistance || (dist === bestDistance && bestMatch && movie.year > bestMatch.year)) {
+      bestDistance = dist;
+      bestMatch = movie;
+    }
+  }
+
+  return bestDistance <= threshold ? bestMatch : null;
+}
+
 // ---- UI Helpers ----
 
 function showLoading() {
@@ -132,10 +179,19 @@ function showError(message) {
   errorMsg.textContent = message;
 }
 
-function showResult(movie) {
+function showResult(movie, didYouMean = false) {
   hideLoading();
   errorEl.classList.add("hidden");
   resultEl.classList.remove("hidden");
+
+  // "Did you mean ...?" hint
+  if (didYouMean) {
+    didYouMeanEl.textContent = `Did you mean "${movie.title}"?`;
+    didYouMeanEl.classList.remove("hidden");
+  } else {
+    didYouMeanEl.textContent = "";
+    didYouMeanEl.classList.add("hidden");
+  }
 
   // Yes! / No. badge
   const passes = movie.rating === 3;
@@ -184,9 +240,14 @@ async function handleSearch() {
     const movie = searchMovie(query, data);
 
     if (!movie) {
-      showError(
-        `Couldn\u2019t find \u201c${query}\u201d in our database. Try the full title \u2014 we have ~10,700 movies from 1874\u20132026.`
-      );
+      const fuzzyMatch = fuzzySearch(query, data);
+      if (fuzzyMatch) {
+        showResult(fuzzyMatch, true);
+      } else {
+        showError(
+          `Couldn\u2019t find \u201c${query}\u201d in our database. Try the full title \u2014 we have ~10,700 movies from 1874\u20132026.`
+        );
+      }
       return;
     }
 
