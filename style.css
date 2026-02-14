@@ -461,6 +461,26 @@ button.info-link {
   margin-top: 0.1rem;
 }
 
+.panel-wiki-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.panel-wiki-link:hover {
+  text-decoration: underline;
+}
+
+.panel-wiki-link .lucide {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
 /* --- Responsive --- */
 @media (max-width: 600px) {
   html {
