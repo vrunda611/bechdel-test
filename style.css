@@ -331,6 +331,10 @@ body {
   font-size: 0.8rem;
 }
 
+.footer-credit {
+  color: #2D3039;
+}
+
 .footer .lucide {
   width: 1em;
   height: 1em;
