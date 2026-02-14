@@ -301,6 +301,13 @@ body {
   font-size: 0.8rem;
 }
 
+.footer .lucide {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.1em;
+  fill: currentColor;
+}
+
 .footer a {
   color: #A8467D;
   text-decoration: none;
