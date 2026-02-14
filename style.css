@@ -129,21 +129,6 @@ body {
   cursor: not-allowed;
 }
 
-.btn-secondary {
-  background: transparent;
-  color: #7A6E5F;
-  border: 1px solid #C4BAA8;
-  margin-top: 1.2rem;
-  font-size: 0.9rem;
-  padding: 0.55rem 1.5rem;
-}
-
-.btn-secondary:hover {
-  color: #2C2416;
-  border-color: #8A7D6B;
-  background: transparent;
-}
-
 /* --- Hidden utility --- */
 .hidden {
   display: none !important;
@@ -196,6 +181,7 @@ body {
   max-width: 520px;
   width: 100%;
   text-align: center;
+  margin-top: -62px;
 }
 
 /* Fade-in animation */
@@ -234,24 +220,26 @@ body {
 }
 
 .badge-pass { color: #197547; }
-.badge-fail { color: #a1322a; }
+.badge-fail { color: #CD4238; }
 
 /* --- Result body (subtitle) --- */
 .result-body {
   font-size: 1.15rem;
   color: #2C2416;
   margin-bottom: 1.2rem;
+  margin-top: -11px;
   line-height: 1.6;
 }
 
 /* --- Result link --- */
 .result-link {
   display: inline-block;
-  color: #96780A;
+  color: #2C2416;
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
   padding: 0.3rem 0;
+  margin-top: -7px;
   transition: color 0.2s;
 }
 

@@ -17,7 +17,6 @@ const resultEl = document.getElementById("result");
 const resultBadge = document.getElementById("result-badge");
 const resultBody = document.getElementById("result-body");
 const resultLink = document.getElementById("result-link");
-const tryAnotherBtn = document.getElementById("try-another-btn");
 
 // ---- Data Fetching ----
 
@@ -97,13 +96,13 @@ function showResult(movie) {
 
   // Yes! / No. badge
   const passes = movie.rating === 3;
-  resultBadge.textContent = passes ? "Yes!" : "No...";
+  resultBadge.textContent = passes ? "Yes!" : "Nope";
   resultBadge.className = "badge " + (passes ? "badge-pass" : "badge-fail");
 
   // Subtitle text
   resultBody.textContent = passes
     ? "women spoke to each other about something other than a man.\ncinema lives another day."
-    : "unfortunately the women were busy existing around men.";
+    : "unfortunately the women were busy existing around men...";
 
   // BechdelTest.com link
   resultLink.href = `https://bechdeltest.com/view/${movie.imdbId}/`;
@@ -169,8 +168,6 @@ movieInput.addEventListener("keydown", (e) => {
 });
 
 movieInput.addEventListener("input", resizeInput);
-
-tryAnotherBtn.addEventListener("click", resetUI);
 
 // Initialize input width
 resizeInput();
