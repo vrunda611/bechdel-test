@@ -45,6 +45,22 @@ body {
   line-height: 1.5;
 }
 
+/* --- Site Title (top-left) --- */
+.site-title {
+  position: fixed;
+  top: 1.2rem;
+  left: 1.5rem;
+  font-size: 0.9rem;
+  color: #A8467D;
+}
+
+.site-title .lucide {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.1em;
+  fill: currentColor;
+}
+
 /* --- Info Link (top-right) --- */
 .info-link {
   position: fixed;
