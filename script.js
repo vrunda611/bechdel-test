@@ -208,7 +208,7 @@ function showResult(movie, didYouMean = false) {
   }
 
   // BechdelTest.com link
-  resultLink.href = `https://bechdeltest.com/view/${movie.imdbId}/`;
+  resultLink.href = `https://bechdeltest.com/view/${movie.id}/`;
 
   // Trigger fade-in animation
   resultEl.classList.remove("fade-in");
