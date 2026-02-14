@@ -184,14 +184,13 @@ function showResult(movie, didYouMean = false) {
   errorEl.classList.add("hidden");
   resultEl.classList.remove("hidden");
 
-  // "Did you mean ...?" hint
+  // Movie title hint
   if (didYouMean) {
     didYouMeanEl.textContent = `Did you mean "${movie.title}"?`;
-    didYouMeanEl.classList.remove("hidden");
   } else {
-    didYouMeanEl.textContent = "";
-    didYouMeanEl.classList.add("hidden");
+    didYouMeanEl.textContent = movie.title;
   }
+  didYouMeanEl.classList.remove("hidden");
 
   // Yes! / No. badge
   const passes = movie.rating === 3;
