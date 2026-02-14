@@ -186,9 +186,9 @@ function showResult(movie, didYouMean = false) {
 
   // Movie title hint
   if (didYouMean) {
-    didYouMeanEl.textContent = `Did you mean "${movie.title}"?`;
+    didYouMeanEl.textContent = `Did you mean "${movie.title} (${movie.year})"?`;
   } else {
-    didYouMeanEl.textContent = movie.title;
+    didYouMeanEl.textContent = `${movie.title} (${movie.year})`;
   }
   didYouMeanEl.classList.remove("hidden");
 
