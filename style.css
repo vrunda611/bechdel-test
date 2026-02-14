@@ -64,6 +64,12 @@ body {
 .site-title {
   font-size: 0.9rem;
   color: #A8467D;
+  text-decoration: none;
+}
+
+.site-title:hover {
+  color: #2D3039;
+  text-decoration: underline;
 }
 
 .site-title .lucide {
@@ -285,7 +291,7 @@ body {
 /* --- Result link --- */
 .result-link {
   display: inline-block;
-  color: #2D3039;
+  color: #5E5E65;
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
@@ -303,7 +309,7 @@ body {
 .footer {
   text-align: center;
   padding: 1.5rem;
-  color: #2D3039;
+  color: #5E5E65;
   font-size: 0.8rem;
 }
 
