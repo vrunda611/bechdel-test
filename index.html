@@ -5,12 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bechdel Test Checker</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="app-content">
   <header class="header">
     <a href="./" class="site-title"><i data-lucide="cat"></i> Do They Talk?</a>
-    <a href="https://en.wikipedia.org/wiki/Bechdel_test" target="_blank" rel="noopener noreferrer" class="info-link">What is the Bechdel Test?</a>
+    <button id="info-panel-toggle" class="info-link" aria-expanded="false">What is the Bechdel Test?</button>
   </header>
   <main class="container">
     <!-- Hero / Search Section -->
@@ -63,6 +67,24 @@
       The Bechdel Test was popularized by Alison Bechdel.
     </p>
   </footer>
+  </div>
+
+  <aside class="info-panel" id="info-panel" aria-hidden="true">
+    <div class="info-panel-inner">
+      <div class="info-panel-header">
+        <h2>What is the Bechdel test?</h2>
+        <button class="info-panel-close" id="info-panel-close" aria-label="Close info panel">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <p>The Bechdel Test, or Bechdel–Wallace Test, sometimes called the Mo Movie Measure or Bechdel Rule is a simple test which names the following three criteria:</p>
+      <ul class="bechdel-rules">
+        <li><i data-lucide="badge-check"></i> It has to have at least two named women in it</li>
+        <li><i data-lucide="badge-check"></i> Who talk to each other</li>
+        <li><i data-lucide="badge-check"></i> About something besides a man</li>
+      </ul>
+    </div>
+  </aside>
 
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="script.js"></script>

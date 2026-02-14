@@ -265,3 +265,35 @@ movieInput.addEventListener("paste", (e) => {
   const text = e.clipboardData.getData("text/plain");
   document.execCommand("insertText", false, text);
 });
+
+// ---- Info Panel ----
+const infoPanelToggle = document.getElementById("info-panel-toggle");
+const infoPanel = document.getElementById("info-panel");
+const infoPanelClose = document.getElementById("info-panel-close");
+
+function openInfoPanel() {
+  document.body.classList.add("info-panel-open");
+  infoPanel.setAttribute("aria-hidden", "false");
+  infoPanelToggle.setAttribute("aria-expanded", "true");
+  infoPanelClose.focus();
+}
+
+function closeInfoPanel() {
+  document.body.classList.remove("info-panel-open");
+  infoPanel.setAttribute("aria-hidden", "true");
+  infoPanelToggle.setAttribute("aria-expanded", "false");
+  infoPanelToggle.focus();
+}
+
+infoPanelToggle.addEventListener("click", () => {
+  const isOpen = document.body.classList.contains("info-panel-open");
+  isOpen ? closeInfoPanel() : openInfoPanel();
+});
+
+infoPanelClose.addEventListener("click", closeInfoPanel);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && document.body.classList.contains("info-panel-open")) {
+    closeInfoPanel();
+  }
+});
