@@ -216,17 +216,10 @@ function showResult(movie, didYouMean = false) {
   resultEl.classList.add("fade-in");
 }
 
-// ---- Auto-resize Input ----
-
-function resizeInput() {
-  const length = movieInput.value.length || movieInput.placeholder.length;
-  movieInput.style.width = Math.max(16, length + 1) + "ch";
-}
-
 // ---- Main Handler ----
 
 async function handleSearch() {
-  const query = movieInput.value.trim();
+  const query = movieInput.textContent.trim();
   if (!query) {
     movieInput.focus();
     return;
@@ -262,11 +255,13 @@ findOutBtn.addEventListener("click", handleSearch);
 
 movieInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
+    e.preventDefault();
     handleSearch();
   }
 });
 
-movieInput.addEventListener("input", resizeInput);
-
-// Initialize input width
-resizeInput();
+movieInput.addEventListener("paste", (e) => {
+  e.preventDefault();
+  const text = e.clipboardData.getData("text/plain");
+  document.execCommand("insertText", false, text);
+});

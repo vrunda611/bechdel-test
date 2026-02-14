@@ -8,21 +8,23 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <span class="site-title"><i data-lucide="cat"></i> Do They Talk?</span>
-  <a href="https://en.wikipedia.org/wiki/Bechdel_test" target="_blank" rel="noopener noreferrer" class="info-link">What is the Bechdel Test?</a>
+  <header class="header">
+    <span class="site-title"><i data-lucide="cat"></i> Do They Talk?</span>
+    <a href="https://en.wikipedia.org/wiki/Bechdel_test" target="_blank" rel="noopener noreferrer" class="info-link">What is the Bechdel Test?</a>
+  </header>
   <main class="container">
     <!-- Hero / Search Section -->
     <section class="hero">
       <h1 class="hero-question">
         Does
         <span class="input-wrapper">
-          <input
-            type="text"
+          <span
             id="movie-input"
-            placeholder="your fav movie"
-            autocomplete="off"
+            contenteditable="true"
+            role="textbox"
+            data-placeholder="your fav movie"
             spellcheck="false"
-          >
+          ></span>
         </span>
         pass the Bechdel Test?
       </h1>

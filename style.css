@@ -37,19 +37,31 @@ body {
   letter-spacing: 0.02em;
   background: #EEE9E1;
   color: #2D3039;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   line-height: 1.5;
 }
 
+/* --- Header --- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  background: #EEE9E1;
+  z-index: 10;
+}
+
 /* --- Site Title (top-left) --- */
 .site-title {
-  position: fixed;
-  top: 1.2rem;
-  left: 1.5rem;
   font-size: 0.9rem;
   color: #A8467D;
 }
@@ -63,9 +75,6 @@ body {
 
 /* --- Info Link (top-right) --- */
 .info-link {
-  position: fixed;
-  top: 1.2rem;
-  right: 1.5rem;
   font-size: 0.9rem;
   color: #A8467D;
   text-decoration: none;
@@ -86,7 +95,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
 }
 
 /* --- Hero / Question --- */
@@ -106,28 +114,26 @@ body {
 
 /* Inline input styled as fill-in-the-blank */
 .input-wrapper {
-  display: inline-block;
-  position: relative;
+  display: inline;
 }
 
 #movie-input {
+  display: inline;
   font-family: inherit;
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 700;
+  font-size: inherit;
+  font-weight: inherit;
   font-style: italic;
   color: #2058A4;
-  background: none;
-  border: none;
   border-bottom: 3px solid #2058A4;
   outline: none;
-  text-align: center;
-  width: 16ch;
-  min-width: 16ch;
+  min-width: 8ch;
   padding: 0;
   transition: border-color 0.2s;
+  cursor: text;
 }
 
-#movie-input::placeholder {
+#movie-input:empty::before {
+  content: attr(data-placeholder);
   color: #7BA3CC;
   font-style: italic;
 }
@@ -322,12 +328,18 @@ body {
 @media (max-width: 600px) {
   html {
     font-size: 16px;
-    scroll-behavior: smooth;
   }
 
-  #movie-input {
-    min-width: 10ch;
-    width: 10ch;
+  .header {
+    padding: 0.6rem 1rem;
+  }
+
+  .site-title {
+    font-size: 0.75rem;
+  }
+
+  .info-link {
+    font-size: 0.75rem;
   }
 
   .container {
@@ -336,5 +348,13 @@ body {
 
   .hero {
     margin-top: 8vh;
+  }
+
+  .result-card {
+    padding: 0 1rem;
+  }
+
+  .result-body {
+    font-size: 1.3rem;
   }
 }
