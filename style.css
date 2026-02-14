@@ -59,6 +59,7 @@ body {
 /* --- Hero / Question --- */
 .hero {
   text-align: center;
+  margin-top: 21px;
   margin-bottom: 2rem;
 }
 
@@ -109,6 +110,7 @@ body {
   padding: 0.75rem 2.2rem;
   font-size: 1.1rem;
   font-weight: 600;
+  letter-spacing: 0.06em;
   font-family: inherit;
   color: #FFFFFF;
   background: #3761de;
@@ -217,12 +219,12 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.6rem;
-  margin-bottom: 1.6rem;
+  margin-bottom: 0.6rem;
 }
 
 /* Yes! / No. badge */
 .badge {
-  font-size: 2.4rem;
+  font-size: 4rem;
   font-weight: 800;
   padding: 0;
   border: none;
@@ -231,13 +233,13 @@ body {
   text-transform: none;
 }
 
-.badge-pass { color: #0F6B38; }
-.badge-fail { color: #A0182C; }
+.badge-pass { color: #197547; }
+.badge-fail { color: #a1322a; }
 
 /* --- Result body (subtitle) --- */
 .result-body {
-  font-size: 1rem;
-  color: #7A6E5F;
+  font-size: 1.15rem;
+  color: #2C2416;
   margin-bottom: 1.2rem;
   line-height: 1.6;
 }
@@ -262,7 +264,7 @@ body {
 .footer {
   text-align: center;
   padding: 1.5rem;
-  color: #A89880;
+  color: #18191a;
   font-size: 0.8rem;
 }
 

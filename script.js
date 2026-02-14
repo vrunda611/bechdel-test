@@ -97,13 +97,13 @@ function showResult(movie) {
 
   // Yes! / No. badge
   const passes = movie.rating === 3;
-  resultBadge.textContent = passes ? "Yes!" : "No.";
+  resultBadge.textContent = passes ? "Yes!" : "No...";
   resultBadge.className = "badge " + (passes ? "badge-pass" : "badge-fail");
 
   // Subtitle text
   resultBody.textContent = passes
     ? "women spoke to each other about something other than a man.\ncinema lives another day."
-    : "women didn't get to speak to each other about something other than a man.\nbetter luck next time.";
+    : "unfortunately the women were busy existing around men.";
 
   // BechdelTest.com link
   resultLink.href = `https://bechdeltest.com/view/${movie.imdbId}/`;
