@@ -114,19 +114,11 @@ function showResult(movie) {
   resultEl.classList.add("fade-in");
 }
 
-function resetUI() {
-  resultEl.classList.add("hidden");
-  resultEl.classList.remove("fade-in");
-  errorEl.classList.add("hidden");
-  movieInput.value = "";
-  movieInput.focus();
-}
-
 // ---- Auto-resize Input ----
 
 function resizeInput() {
   const length = movieInput.value.length || movieInput.placeholder.length;
-  movieInput.style.width = Math.max(6, length + 1) + "ch";
+  movieInput.style.width = Math.max(16, length + 1) + "ch";
 }
 
 // ---- Main Handler ----
