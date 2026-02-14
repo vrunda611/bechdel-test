@@ -357,4 +357,8 @@ body {
   .result-body {
     font-size: 1.3rem;
   }
+
+  .did-you-mean {
+    font-size: 1.1rem;
+  }
 }
