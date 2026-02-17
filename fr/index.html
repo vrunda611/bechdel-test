@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V&eacute;rificateur du test de Bechdel</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="app-content">
+  <header class="header">
+    <a href="../" class="site-title"><i data-lucide="cat"></i> Do They Talk?</a>
+    <div class="header-right">
+      <button id="info-panel-toggle" class="info-link" aria-expanded="false" data-i18n="infoToggle">C&#x2019;est quoi le test de Bechdel&#xA0;?</button>
+      <span class="header-separator">|</span>
+      <a href="/" class="lang-switch" data-i18n="langSwitchText" data-i18n-href="langSwitchHref">EN</a>
+    </div>
+  </header>
+  <main class="container">
+    <!-- Hero / Search Section -->
+    <section class="hero">
+      <h1 class="hero-question">
+        <span data-i18n="heroPrefix">Est-ce que</span>
+        <span class="input-wrapper">
+          <span
+            id="movie-input"
+            contenteditable="true"
+            role="textbox"
+            data-placeholder="ton film pr&eacute;f&eacute;r&eacute;"
+            data-i18n-placeholder="inputPlaceholder"
+            spellcheck="false"
+          ></span>
+        </span>
+        <span data-i18n="heroSuffix">passe le test de Bechdel&#xA0;?</span>
+      </h1>
+      <button id="find-out-btn" class="btn" type="button" data-i18n="findOut">D&eacute;couvrir</button>
+    </section>
+
+    <!-- Loading State -->
+    <section id="loading" class="loading hidden" aria-live="polite">
+      <p class="loading-text"><span data-i18n="loadingText">Consultation du conseil du cin&eacute;ma</span><span class="dots"></span></p>
+    </section>
+
+    <!-- Error State -->
+    <section id="error" class="error-card hidden" aria-live="polite">
+      <p id="error-message"></p>
+    </section>
+
+    <!-- Result Card -->
+    <section id="result" class="result-card hidden" aria-live="polite">
+      <p id="did-you-mean" class="did-you-mean hidden"></p>
+      <div class="result-header">
+        <span id="result-badge" class="badge"></span>
+      </div>
+
+      <p id="result-body" class="result-body"></p>
+
+      <a id="result-link" class="result-link" href="#" target="_blank" rel="noopener noreferrer" data-i18n="seeMore">
+        Voir plus sur BechdelTest.com &rarr;
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>
+      <span class="footer-credit" data-i18n="footerCredit">Cr&eacute;&eacute; par Vrunda (et Claude 🤭)</span> <i data-lucide="heart"></i>
+      <span data-i18n="footerData">Donn&eacute;es de</span> <a href="https://bechdeltest.com" target="_blank" rel="noopener noreferrer">bechdeltest.com</a>.
+      <span data-i18n="footerBechdel">Le test de Bechdel a &eacute;t&eacute; popularis&eacute; par Alison Bechdel.</span>
+    </p>
+  </footer>
+  </div>
+
+  <aside class="info-panel" id="info-panel" aria-hidden="true">
+    <div class="info-panel-inner">
+      <div class="info-panel-header">
+        <h2 data-i18n="infoPanelTitle">C&#x2019;est quoi le test de Bechdel&#xA0;?</h2>
+        <button class="info-panel-close" id="info-panel-close" aria-label="Fermer le panneau">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <p data-i18n="infoPanelDesc">Le test de Bechdel, ou test de Bechdel-Wallace, parfois appel&eacute; Mo Movie Measure ou r&egrave;gle de Bechdel, est un test simple qui repose sur trois crit&egrave;res&#xA0;:</p>
+      <ul class="bechdel-rules">
+        <li><i data-lucide="badge-check"></i> <span data-i18n="rule1">Le film doit avoir au moins deux femmes nomm&eacute;es</span></li>
+        <li><i data-lucide="badge-check"></i> <span data-i18n="rule2">Qui se parlent entre elles</span></li>
+        <li><i data-lucide="badge-check"></i> <span data-i18n="rule3">&Agrave; propos d&#x2019;autre chose qu&#x2019;un homme</span></li>
+      </ul>
+      <a href="https://fr.wikipedia.org/wiki/Test_de_Bechdel" target="_blank" rel="noopener noreferrer" class="panel-wiki-link" data-i18n-href="wikiLinkHref"><span data-i18n="wikiLinkText">En savoir plus sur Wikip&eacute;dia</span> <i data-lucide="external-link"></i></a>
+    </div>
+  </aside>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="../translations.js"></script>
+  <script src="../script.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

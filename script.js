@@ -2,7 +2,41 @@
 // Bechdel Test Checker — Logic
 // ===========================
 
-const DATA_URL = "movies.json";
+// ---- Language Detection ----
+const LANG = document.documentElement.lang === "fr" ? "fr" : "en";
+const t = TRANSLATIONS[LANG];
+
+// ---- i18n Helpers ----
+
+function interpolate(template, vars) {
+  return template.replace(/\{(\w+)\}/g, (_, key) => vars[key] ?? "");
+}
+
+function applyTranslations() {
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.getAttribute("data-i18n");
+    if (t[key] !== undefined) {
+      el.textContent = t[key];
+    }
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    if (t[key] !== undefined) {
+      el.setAttribute("data-placeholder", t[key]);
+    }
+  });
+  document.querySelectorAll("[data-i18n-href]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-href");
+    if (t[key] !== undefined) {
+      el.setAttribute("href", t[key]);
+    }
+  });
+}
+
+applyTranslations();
+
+// ---- Data URL (adjust for /fr subdirectory) ----
+const DATA_URL = LANG === "fr" ? "../movies.json" : "movies.json";
 
 // Cached dataset (populated after first fetch)
 let movieData = null;
@@ -21,43 +55,8 @@ const didYouMeanEl = document.getElementById("did-you-mean");
 
 // ---- Descriptor texts (cycled sequentially) ----
 
-const passTexts = [
-  "Women talked to each other about something other than a man. The bar is low and yet.",
-  "Women had a whole conversation without mentioning a single dude. Revolutionary, apparently.",
-  "The women in this film acknowledged each other's existence. Cinema is healing.",
-  "Two women spoke and the world didn't end. Take notes, Hollywood.",
-  "Women talking to women about not-men. Groundbreaking. Literally groundbreaking.",
-  "The girls are girlbossing, the plot is plotting, and men are simply not involved.",
-  "Proof that women can in fact carry a conversation without a man. Shocking, we know.",
-  "The women had things to say to each other. And none of it was about Greg.",
-  "Somewhere, a woman talked to another woman about literally anything else. We won.",
-  "Women existing beyond the male gaze? In THIS economy? Love that for them.",
-  "Two named women. One conversation. Zero men mentioned. That's cinema, baby.",
-  "The bare minimum was met and honestly? We're celebrating.",
-  "Women spoke to each other like real humans do. The representation we deserve.",
-  "Not a single 'but what does he think?' in sight. A masterpiece of dialogue.",
-  "The women in this movie passed the vibe check AND the Bechdel Test.",
-  "Women having conversations about stuff that matters to them. Wild concept, huge if true.",
-];
-
-const failTexts = [
-  "Unfortunately the women were busy existing around men.",
-  "The women simply did not have time for each other. Too many men to orbit, apparently.",
-  "Shockingly, the women forgot to talk to each other. Must've been busy being plot devices.",
-  "The girlies never got their moment. Hollywood said 'not today.'",
-  "Two women could have had a chat. The writers said absolutely not.",
-  "The women were there. They just... never spoke. Like decorative houseplants.",
-  "Zero woman-to-woman conversations detected. The algorithm is disappointed.",
-  "The women's dialogue budget was apparently spent on the men. Classic.",
-  "Another film where women exist exclusively in relation to men. Groundbreaking.",
-  "The women were present but narratively invisible. A tale as old as cinema.",
-  "She was there. She was named. She just never talked to another her.",
-  "The script really said 'women talking to women? Not on my watch.'",
-  "Turns out the women had nothing to say to each other. Or weren't allowed to.",
-  "The women in this film communicated exclusively through men. Very carrier pigeon of them.",
-  "No woman-to-woman dialogue found. The bar was underground and they brought a shovel.",
-  "Hollywood once again confirming that women only exist when men are watching.",
-];
+const passTexts = t.passTexts;
+const failTexts = t.failTexts;
 
 let passIndex = 0;
 let failIndex = 0;
@@ -69,7 +68,7 @@ async function fetchData() {
 
   const response = await fetch(DATA_URL);
   if (!response.ok) {
-    throw new Error("Failed to load movie data.");
+    throw new Error(t.genericError);
   }
 
   movieData = await response.json();
@@ -163,13 +162,13 @@ function showLoading() {
   resultEl.classList.add("hidden");
   resultEl.classList.remove("fade-in");
   findOutBtn.disabled = true;
-  findOutBtn.textContent = "Searching\u2026";
+  findOutBtn.textContent = t.searching;
 }
 
 function hideLoading() {
   loadingEl.classList.add("hidden");
   findOutBtn.disabled = false;
-  findOutBtn.textContent = "Find Out";
+  findOutBtn.textContent = t.findOut;
 }
 
 function showError(message) {
@@ -186,15 +185,15 @@ function showResult(movie, didYouMean = false) {
 
   // Movie title hint
   if (didYouMean) {
-    didYouMeanEl.textContent = `Did you mean "${movie.title} (${movie.year})"?`;
+    didYouMeanEl.textContent = interpolate(t.didYouMean, { title: movie.title, year: movie.year });
   } else {
-    didYouMeanEl.textContent = `${movie.title} (${movie.year})`;
+    didYouMeanEl.textContent = interpolate(t.movieTitle, { title: movie.title, year: movie.year });
   }
   didYouMeanEl.classList.remove("hidden");
 
   // Yes! / No. badge
   const passes = movie.rating === 3;
-  resultBadge.textContent = passes ? "Yes!" : "Nope";
+  resultBadge.textContent = passes ? t.yes : t.nope;
   resultBadge.className = "badge " + (passes ? "badge-pass" : "badge-fail");
 
   // Subtitle text (cycle through descriptors)
@@ -236,16 +235,14 @@ async function handleSearch() {
       if (fuzzyMatch) {
         showResult(fuzzyMatch, true);
       } else {
-        showError(
-          `Couldn\u2019t find \u201c${query}\u201d in our database. Try the full title \u2014 we have ~10,700 movies from 1874\u20132026.`
-        );
+        showError(interpolate(t.notFound, { query }));
       }
       return;
     }
 
     showResult(movie);
   } catch (err) {
-    showError(err.message || "Something went wrong. Please try again.");
+    showError(err.message || t.genericError);
   }
 }
 

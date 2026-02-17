@@ -110,6 +110,32 @@ button.info-link {
   letter-spacing: inherit;
 }
 
+/* --- Header Right (info toggle + lang switcher) --- */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.header-separator {
+  color: #C5C0B8;
+  font-size: 0.85rem;
+  user-select: none;
+}
+
+.lang-switch {
+  font-size: 0.9rem;
+  color: #A8467D;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.lang-switch:hover {
+  color: #2D3039;
+  text-decoration: underline;
+}
+
 /* --- Layout --- */
 .container {
   width: 100%;
@@ -496,6 +522,18 @@ button.info-link {
   }
 
   .info-link {
+    font-size: 0.75rem;
+  }
+
+  .lang-switch {
+    font-size: 0.75rem;
+  }
+
+  .header-right {
+    gap: 0.4rem;
+  }
+
+  .header-separator {
     font-size: 0.75rem;
   }
 

@@ -14,30 +14,35 @@
   <div class="app-content">
   <header class="header">
     <a href="./" class="site-title"><i data-lucide="cat"></i> Do They Talk?</a>
-    <button id="info-panel-toggle" class="info-link" aria-expanded="false">What is the Bechdel Test?</button>
+    <div class="header-right">
+      <button id="info-panel-toggle" class="info-link" aria-expanded="false" data-i18n="infoToggle">What is the Bechdel Test?</button>
+      <span class="header-separator">|</span>
+      <a href="/fr" class="lang-switch" data-i18n="langSwitchText" data-i18n-href="langSwitchHref">FR</a>
+    </div>
   </header>
   <main class="container">
     <!-- Hero / Search Section -->
     <section class="hero">
       <h1 class="hero-question">
-        Does
+        <span data-i18n="heroPrefix">Does</span>
         <span class="input-wrapper">
           <span
             id="movie-input"
             contenteditable="true"
             role="textbox"
             data-placeholder="your fav movie"
+            data-i18n-placeholder="inputPlaceholder"
             spellcheck="false"
           ></span>
         </span>
-        pass the Bechdel Test?
+        <span data-i18n="heroSuffix">pass the Bechdel Test?</span>
       </h1>
-      <button id="find-out-btn" class="btn" type="button">Find Out</button>
+      <button id="find-out-btn" class="btn" type="button" data-i18n="findOut">Find Out</button>
     </section>
 
     <!-- Loading State -->
     <section id="loading" class="loading hidden" aria-live="polite">
-      <p class="loading-text">Consulting the council of cinema<span class="dots"></span></p>
+      <p class="loading-text"><span data-i18n="loadingText">Consulting the council of cinema</span><span class="dots"></span></p>
     </section>
 
     <!-- Error State -->
@@ -54,7 +59,7 @@
 
       <p id="result-body" class="result-body"></p>
 
-      <a id="result-link" class="result-link" href="#" target="_blank" rel="noopener noreferrer">
+      <a id="result-link" class="result-link" href="#" target="_blank" rel="noopener noreferrer" data-i18n="seeMore">
         See more on BechdelTest.com &rarr;
       </a>
     </section>
@@ -62,9 +67,9 @@
 
   <footer class="footer">
     <p>
-      <span class="footer-credit">Made by Vrunda (& Claude 🤭)</span> <i data-lucide="heart"></i>
-      Data from <a href="https://bechdeltest.com" target="_blank" rel="noopener noreferrer">bechdeltest.com</a>.
-      The Bechdel Test was popularized by Alison Bechdel.
+      <span class="footer-credit" data-i18n="footerCredit">Made by Vrunda (& Claude 🤭)</span> <i data-lucide="heart"></i>
+      <span data-i18n="footerData">Data from</span> <a href="https://bechdeltest.com" target="_blank" rel="noopener noreferrer">bechdeltest.com</a>.
+      <span data-i18n="footerBechdel">The Bechdel Test was popularized by Alison Bechdel.</span>
     </p>
   </footer>
   </div>
@@ -72,22 +77,23 @@
   <aside class="info-panel" id="info-panel" aria-hidden="true">
     <div class="info-panel-inner">
       <div class="info-panel-header">
-        <h2>What is the Bechdel test?</h2>
+        <h2 data-i18n="infoPanelTitle">What is the Bechdel test?</h2>
         <button class="info-panel-close" id="info-panel-close" aria-label="Close info panel">
           <i data-lucide="x"></i>
         </button>
       </div>
-      <p>The Bechdel Test, or Bechdel–Wallace Test, sometimes called the Mo Movie Measure or Bechdel Rule is a simple test which names the following three criteria:</p>
+      <p data-i18n="infoPanelDesc">The Bechdel Test, or Bechdel–Wallace Test, sometimes called the Mo Movie Measure or Bechdel Rule is a simple test which names the following three criteria:</p>
       <ul class="bechdel-rules">
-        <li><i data-lucide="badge-check"></i> It has to have at least two named women in it</li>
-        <li><i data-lucide="badge-check"></i> Who talk to each other</li>
-        <li><i data-lucide="badge-check"></i> About something besides a man</li>
+        <li><i data-lucide="badge-check"></i> <span data-i18n="rule1">It has to have at least two named women in it</span></li>
+        <li><i data-lucide="badge-check"></i> <span data-i18n="rule2">Who talk to each other</span></li>
+        <li><i data-lucide="badge-check"></i> <span data-i18n="rule3">About something besides a man</span></li>
       </ul>
-      <a href="https://en.wikipedia.org/wiki/Bechdel_test" target="_blank" rel="noopener noreferrer" class="panel-wiki-link">Read more on Wikipedia <i data-lucide="external-link"></i></a>
+      <a href="https://en.wikipedia.org/wiki/Bechdel_test" target="_blank" rel="noopener noreferrer" class="panel-wiki-link" data-i18n-href="wikiLinkHref"><span data-i18n="wikiLinkText">Read more on Wikipedia</span> <i data-lucide="external-link"></i></a>
     </div>
   </aside>
 
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="translations.js"></script>
   <script src="script.js"></script>
   <script>lucide.createIcons();</script>
 </body>
